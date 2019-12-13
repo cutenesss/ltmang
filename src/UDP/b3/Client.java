@@ -1,0 +1,80 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package UDP.b3;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Cuteness
+ */
+public class Client {
+    DatagramSocket client;
+    DatagramPacket sendPacket, receivePacket;
+    byte[] sendBuff, receiveBuff;
+
+    public Client() {
+        try {
+            client = new DatagramSocket();
+        } catch (SocketException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void sending(){
+        sendBuff = new byte[1024];
+        try {
+            InetAddress ip = InetAddress.getByName("localhost");
+            Student s = new Student("124");
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            try {
+                ObjectOutputStream oos = new ObjectOutputStream(out);
+                oos.writeObject(s);
+                sendBuff= out.toByteArray();
+                sendPacket = new DatagramPacket(sendBuff, sendBuff.length, ip, 1109);
+                client.send(sendPacket);
+                System.out.println("Si");
+            } catch (IOException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }     
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void listening(){
+        receiveBuff = new byte[1024];
+        while(true){
+            receivePacket = new DatagramPacket(receiveBuff, receiveBuff.length);
+            try {
+                client.receive(receivePacket);
+                byte[] data = receivePacket.getData();
+                ByteArrayInputStream in = new ByteArrayInputStream(data);
+                ObjectInputStream ois = new ObjectInputStream(in);
+                try {
+                    Student s1 = (Student) ois.readObject();
+                    System.out.println(s1.getId() + " " + s1.getCode() + " "+ s1.getGpa());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }
+}

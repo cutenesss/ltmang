@@ -1,0 +1,4 @@
+xem xét tất cả các cấu hình tổ hợp
+thỏa mãn các ràng buộc của bài toán. Phương pháp giải
+thường đưa về một thuật toán vét cạn (thuật toán sinh,
+thuật toán quay lui,…).
