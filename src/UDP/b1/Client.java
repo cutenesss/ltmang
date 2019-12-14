@@ -94,17 +94,6 @@ public class Client {
                 b -= a;
             }
         }
-        
-        StringBuilder result1 = new StringBuilder();
-        StringBuilder result2 = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
-            int ascii = (int) str.charAt(i);
-            if ((48 <= ascii && ascii <= 57) || (65 <= ascii && ascii <= 90) || (97 <= ascii && ascii <= 122)) {
-                result1.append(str.charAt(i));
-            } else {
-                result2.append(str.charAt(i));
-            }
-        }
         return a;
     }
 

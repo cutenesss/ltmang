@@ -11,6 +11,12 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/ADM/Documents/NetBeansProjects/ltmang/src/ClientServer/Server.java</file>
+            <file>file:/C:/Users/ADM/Documents/NetBeansProjects/ltmang/src/luyenThi/TCP.java</file>
+            <file>file:/C:/Users/ADM/Documents/NetBeansProjects/ltmang/src/UDP/b1/Client.java</file>
+            <file>file:/C:/Users/ADM/Documents/NetBeansProjects/ltmang/src/luyenThi/UDP.java</file>
+            <file>file:/C:/Users/ADM/Documents/NetBeansProjects/ltmang/src/ClientServer/Client.java</file>
+        </group>
     </open-files>
 </project-private>

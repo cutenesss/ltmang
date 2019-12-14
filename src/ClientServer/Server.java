@@ -5,6 +5,7 @@
  */
 package ClientServer;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,19 +28,21 @@ public class Server {
         try {
             ServerSocket server = new ServerSocket(1107);
             while(true){
-                Socket conn = server.accept();                
+                Socket conn = server.accept();  
+                System.out.println("aaaaa");
                 in = conn.getInputStream();
                 in.read(b);        
-                String s = new String(b, "UTF-8").trim();
+                String s = new String(b).trim();
                 System.out.println(s);
                 if(s.equals("a145")) System.out.println("ok");
-                out = new DataOutputStream(conn.getOutputStream()); 
                 int m = 4;
+                byte[] m1 = intToBytes(m);
                 int n = 5;
-                out.writeInt(m);
-                out.writeInt(n);
-                System.out.println(m+" "+n);
-                in.read(a);
+                byte[] n1 = intToBytes(n);
+                out = new DataOutputStream(conn.getOutputStream());
+                out.write(m1);
+                out.write(n1);
+//                in.read(a);
                 conn.close();
             }
         } catch (IOException ex) {
@@ -47,5 +50,13 @@ public class Server {
         }       
     }    
     
+    private static byte[] intToBytes(int data) {
+    return new byte[] {
+        (byte)((data >> 24) & 0xff),
+        (byte)((data >> 16) & 0xff),
+        (byte)((data >> 8) & 0xff),
+        (byte)((data >> 0) & 0xff),
+    };
+}
     
 }

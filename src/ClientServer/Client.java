@@ -20,7 +20,7 @@ public class Client {
 
     public static void main(String[] args) {
         try (
-                Socket client = new Socket("192.168.140.2", 1107);
+                Socket client = new Socket("127.0.0.1", 1107);
                 DataOutputStream out = new DataOutputStream(client.getOutputStream());
                 DataInputStream in = new DataInputStream(client.getInputStream());) {
                     System.out.println("a");
