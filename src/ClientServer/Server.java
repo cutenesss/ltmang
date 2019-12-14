@@ -42,7 +42,6 @@ public class Server {
                 out = new DataOutputStream(conn.getOutputStream());
                 out.write(m1);
                 out.write(n1);
-//                in.read(a);
                 conn.close();
             }
         } catch (IOException ex) {

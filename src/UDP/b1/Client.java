@@ -97,24 +97,6 @@ public class Client {
         return a;
     }
 
-    public static void separate(String string) {
-        StringBuilder alphabetsBuilder = new StringBuilder();
-        StringBuilder numbersBuilder = new StringBuilder();
-        StringBuilder symbolsBuilder = new StringBuilder();
-        for (int i = 0; i < string.length(); i++) {
-            char ch = string.charAt(i);
-            if (Character.isAlphabetic(ch)) {
-                alphabetsBuilder.append(ch);
-            } else if (Character.isDigit(ch)) {
-                numbersBuilder.append(ch);
-            } else {
-                symbolsBuilder.append(ch);
-            }
-        }
-        System.out.println("Alphabets in string: " + alphabetsBuilder.toString());
-        System.out.println("Numbers in String: " + numbersBuilder.toString());
-        System.out.println("Sysmbols in String: " + symbolsBuilder.toString()); 
-    }
     
     public int bcnn(int a, int b) {
         return a * b / ucln(a, b);

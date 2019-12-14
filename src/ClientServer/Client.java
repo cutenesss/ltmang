@@ -5,9 +5,12 @@
  */
 package ClientServer;
 
+import UDP.b3.Student;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,15 +24,16 @@ public class Client {
     public static void main(String[] args) {
         try (
                 Socket client = new Socket("127.0.0.1", 1107);
-                DataOutputStream out = new DataOutputStream(client.getOutputStream());
-                DataInputStream in = new DataInputStream(client.getInputStream());) {
+                ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
+                ObjectInputStream in = new ObjectInputStream(client.getInputStream());) {
                     System.out.println("a");
-                    out.writeUTF("a145");
-                    int a = in.readInt();
-                    int b = in.readInt();
-                    System.out.println(a+" "+b);
-                    out.writeInt(a+b);
-                    out.writeInt(a*b);
+                    out.writeObject("a145");
+            try {
+                Student hs = (Student) in.readObject();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    
                     client.close();
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
